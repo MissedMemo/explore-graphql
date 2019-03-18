@@ -5,7 +5,7 @@ const app = express()
 
 app.use( '/graphql', expressGraphQL({
   schema,
-  graphiQL: true
+  graphiql: true
 }))
 
 

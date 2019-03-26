@@ -1,6 +1,7 @@
 import React from 'react'
 import { render } from 'react-dom'
-import ApolloClient, { gql } from 'apollo-boost'
+import ApolloClient from 'apollo-boost'
+import { ApolloProvider } from 'react-apollo'
 
 import App from './app.jsx'
 
@@ -15,20 +16,9 @@ const client = new ApolloClient({
   }
 })
 
-client.query({
-  query: gql`
-    query getNameAndEmail {
-      viewer {
-        email
-        name
-      }
-    }
-  `
-})
-.then( res => console.log(res) )
-
-
 render(
-  <App />,
+  <ApolloProvider client={client}>
+    <App />
+  </ApolloProvider>,
   document.getElementById('root')
 )

@@ -1,6 +1,7 @@
 .cache
 .DS_Store
 .vscode
+.env
 node_modules
 dist
 *.log

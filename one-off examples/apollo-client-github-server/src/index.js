@@ -2,15 +2,15 @@ import React from 'react'
 import { render } from 'react-dom'
 import ApolloClient, { gql } from 'apollo-boost'
 
-const App = () => <div>Hello, React!</div>
+const App = () => <div>Hey, React!</div>
 
 const client = new ApolloClient({
-  uri: "https://api.github.com/explore-graphql",
+  uri: "https://api.github.com/graphql",
   request: operation => {
     operation.setContext({
       headers: {
-        authorization: `Bearer f918c540151c156956b6354940c30308ce88f36a`
-      }
+        authorization: `Bearer ${process.env.ACCESS_KEY}`
+      },
     })
   }
 })

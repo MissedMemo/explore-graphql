@@ -3,7 +3,8 @@ import { render } from 'react-dom'
 import ApolloClient from 'apollo-boost'
 import { ApolloProvider } from 'react-apollo'
 
-import App from './app.jsx'
+import Owner from './owner.jsx'
+import Repos from './repos.jsx'
 
 const client = new ApolloClient({
   uri: "https://api.github.com/graphql",
@@ -18,7 +19,8 @@ const client = new ApolloClient({
 
 render(
   <ApolloProvider client={client}>
-    <App />
+    <Owner />
+    <Repos />
   </ApolloProvider>,
   document.getElementById('root')
 )

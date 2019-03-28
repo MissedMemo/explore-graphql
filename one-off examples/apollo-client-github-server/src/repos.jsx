@@ -18,17 +18,33 @@ const repoQuery = gql`
 
 export default () => <div className="repos">
   <Query query={repoQuery} variables={{first: 5}}>
-    { ({loading, error, data}) => {
+    { ({loading, error, data, fetchMore }) => {
       if (loading) return <p>loading...</p>
       if (error) return <p>{ error.message }</p>
-      return (
+
+      const numRepos = data.viewer.repositories.edges.length
+
+      return <>
         <ul>
-          <h2>first 5 repositories...</h2>
+          <h2>first {numRepos} repositories...</h2>
           { data.viewer.repositories.edges.map(
             ({node}) => <li key={node.name}>{ node.name }</li>
           )}
         </ul>
-      )
+        <button onClick={ () => {
+          fetchMore({
+            variables: { first: numRepos + 5 },
+            updateQuery: (prev, {fetchMoreResult}) => {
+              if ( !fetchMoreResult ) {
+                return prev
+              }
+              return Object.assign( prev, fetchMoreResult )    
+            }
+          })
+        }} >
+          More...
+        </button>
+      </>
     }}
   </Query>
 </div>

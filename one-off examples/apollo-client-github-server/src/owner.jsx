@@ -11,7 +11,7 @@ const query = gql`
   }
 `
 
-export default () => <div className="app">
+export default () => <div className="owner">
   <Query query={query}>
     { result => {
       if (result.loading) return <p>loading...</p>

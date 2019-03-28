@@ -16,7 +16,7 @@ const repoQuery = gql`
   }
 `
 
-export default () => <div className="app">
+export default () => <div className="repos">
   <Query query={repoQuery} variables={{first: 5}}>
     { ({loading, error, data}) => {
       if (loading) return <p>loading...</p>

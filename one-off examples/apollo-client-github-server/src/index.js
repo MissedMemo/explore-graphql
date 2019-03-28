@@ -19,8 +19,10 @@ const client = new ApolloClient({
 
 render(
   <ApolloProvider client={client}>
-    <Owner />
-    <Repos />
+    <div className='app'>
+      <Owner />
+      <Repos />
+    </div>
   </ApolloProvider>,
   document.getElementById('root')
 )

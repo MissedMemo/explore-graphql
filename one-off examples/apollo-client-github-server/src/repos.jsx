@@ -16,6 +16,20 @@ const repoQuery = gql`
   }
 `
 
+const more = (getRepos, num) => {
+    
+  getRepos({
+    variables: { first: num + 5 },
+    updateQuery: (prev, {fetchMoreResult}) => {
+      if ( !fetchMoreResult ) {
+        return prev
+      }
+      return Object.assign( prev, fetchMoreResult )    
+    }
+  })
+
+}
+
 export default () => <div className="repos">
   <Query query={repoQuery} variables={{first: 5}}>
     { ({loading, error, data, fetchMore }) => {
@@ -31,17 +45,7 @@ export default () => <div className="repos">
             ({node}) => <li key={node.name}>{ node.name }</li>
           )}
         </ul>
-        <button onClick={ () => {
-          fetchMore({
-            variables: { first: numRepos + 5 },
-            updateQuery: (prev, {fetchMoreResult}) => {
-              if ( !fetchMoreResult ) {
-                return prev
-              }
-              return Object.assign( prev, fetchMoreResult )    
-            }
-          })
-        }} >
+        <button onClick={ () => { more(fetchMore, numRepos) }} >
           More...
         </button>
       </>

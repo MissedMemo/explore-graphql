@@ -1,18 +1,9 @@
 import React from 'react'
 import { Query } from 'react-apollo'
-import { gql } from 'apollo-boost'
-
-const query = gql`
-  {
-    viewer {
-      email
-      name
-    }
-  }
-`
+import { ownerQuery } from './queries'
 
 export default () => <div className="owner">
-  <Query query={query}>
+  <Query query={ownerQuery}>
     { result => {
       if (result.loading) return <p>loading...</p>
       if (result.error) return <p>{ result.error.message }</p>

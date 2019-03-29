@@ -22,3 +22,16 @@ export const repoQuery = gql`
     }
   }
 `
+
+export const addstarQuery = gql`
+  mutation ($repoid: ID!) {
+    addStar( input: {starrableId: $repoid} ) {
+      starrable {
+        stargazers {
+          totalCount
+        }
+      }
+      viewerHasStarred
+    }
+  }
+`

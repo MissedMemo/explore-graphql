@@ -35,3 +35,16 @@ export const addstarQuery = gql`
     }
   }
 `
+
+export const removestarQuery = gql`
+  mutation ($repoid: ID!) {
+    removeStar( input: {starrableId: $repoid} ) {
+      starrable {
+        stargazers {
+          totalCount
+        }
+      }
+      viewerHasStarred
+    }
+  }
+`
